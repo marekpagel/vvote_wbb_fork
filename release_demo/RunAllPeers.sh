@@ -12,7 +12,7 @@ openPeer(){
 export PEERNAME="Peer$1"
 fifo=$(mktemp -u) &&
   mkfifo "$fifo" &&
-  (rm "$fifo" && { java -Dlogback.configurationFile=./release_demo/logback-demo.xml -jar ./release/WBBPeer.jar ./release_demo/Peer$1/wbbconfigPeer$1.json <&3 3<&-; } &) 3<> "$fifo"
+  (rm "$fifo" && { java -Djava.library.path=/usr/local/lib/libpbc.so.1 -Dlogback.configurationFile=./release_demo/logback-demo.xml -jar ./release/WBBPeer.jar ./release_demo/Peer$1/wbbconfigPeer$1.json <&3 3<&-; } &) 3<> "$fifo"
 }
 openPeer 1
 openPeer 2
